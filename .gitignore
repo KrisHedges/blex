@@ -3,6 +3,8 @@
 /db
 /deps
 /*.ez
+/*.dump
+/logfile
 
 # Store files on Mac
 .DS_Store

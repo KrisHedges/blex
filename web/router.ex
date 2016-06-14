@@ -11,8 +11,12 @@ defmodule KrishedgesSpace.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  pipeline :public_api do
+    plug :accepts, ["json"]
+  end
+
   scope "/public-api", KrishedgesSpace do
-    pipe_through :api
+    pipe_through :public_api
     get "/posts", PostController, :public_index
     get "/posts/:id", PostController, :show
     resources "/categories", CategoryController, only: [:index, :show]

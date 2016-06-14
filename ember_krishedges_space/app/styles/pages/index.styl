@@ -1,0 +1,54 @@
+.latest-by-category
+  text-align center
+  &:after
+    content ' '
+    clear both
+    display table
+  dt, dd
+    margin 1em 0 1em 0
+  p
+    text-align left
+  svg
+    max-width 150px
+    height auto
+    max-height 100px
+    margin 0 auto
+    #Regions
+      path
+        opacity 0.88
+        stroke $deep-purple
+        stroke-width 3px
+    #Brain
+      path
+        stroke lighten($deep-purple, 15%)
+        stroke-width 3px
+  .cerebral
+    svg
+      #Visual-Cortex,
+      #Auditory-Cortex
+        display none
+  .visual
+    svg
+      #Cerebral-Cortex,
+      #Auditory-Cortex
+        display none
+  .auditory
+    svg
+      #Cerebral-Cortex,
+      #Visual-Cortex
+        display none
+
+.category-definition
+  display block
+  font-size 0.85em
+  padding-bottom 0.5em
+  margin-bottom 1.5em
+  border-bottom 1px solid $green
+  h5
+    margin 0.25em
+    color $purple !important
+    text-align center
+  p
+    margin 0.3em
+    color $black
+    text-align center

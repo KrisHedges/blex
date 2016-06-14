@@ -1,0 +1,9 @@
+<div class="mobile-menu">
+  <ul>
+    <li>{{#link-to 'index' }}Home{{/link-to}}</li>
+    {{#each pages as |page|}}
+      <li>{{#link-to 'show' page.slug}}{{page.title}}{{/link-to}}</li>
+    {{/each}}
+    <li>{{#link-to 'posts' (query-params page=1 )}}Everything{{/link-to}}</li>
+  </ul>
+</div>

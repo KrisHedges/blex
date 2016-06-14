@@ -1,0 +1,15 @@
+<div class="main-menu">
+  <div class="hamburger" {{action 'toggleMenu'}}>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul>
+    <li>{{#link-to 'index' }}Home{{/link-to}}</li>
+    {{#each pages as |page|}}
+      <li>{{#link-to 'show' page.slug}}{{page.title}}{{/link-to}}</li>
+    {{/each}}
+    <li>{{#link-to 'posts'}}Everything{{/link-to}}</li>
+  </ul>
+  <a href="" class="logo">KRISHEDGES.SPACE</a>
+</div>

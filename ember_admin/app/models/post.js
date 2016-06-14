@@ -53,5 +53,9 @@ export default DS.Model.extend({
   published_date: Ember.computed('published_at', function(){
     let time = this.get('published_at');
     return time ? moment(time).format('MMMM Do YYYY') : false;
+  }),
+
+  parent: Ember.computed('id', function(){
+      return this.get('slug').substr(0, this.get('id').lastIndexOf("/"));
   })
 });
