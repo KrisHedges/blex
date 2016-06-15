@@ -8,6 +8,8 @@ export default DS.Model.extend({
   body: DS.attr('string'),
   description: DS.attr('string'),
   image: DS.attr('string'),
+  author_name: DS.attr('string'),
+  author_email: DS.attr('string'),
   published: DS.attr('boolean'),
   published_at: DS.attr('date'),
   inserted_at: DS.attr('date'),
@@ -15,10 +17,6 @@ export default DS.Model.extend({
   edits: DS.hasMany('edit', {async: true}),
   categories: DS.hasMany('category'),
   user: DS.belongsTo('user', {async: true}),
-
-  author_name: Ember.computed.alias('user.username'),
-  author_email: Ember.computed.alias('user.email'),
-
 
   alpha_categories: Ember.computed('categories', function(){
     return this.get('categories').sortBy('name');
