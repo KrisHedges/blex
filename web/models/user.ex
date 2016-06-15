@@ -37,7 +37,7 @@ defmodule KrishedgesSpace.User do
     cast(model, params, @required_fields, ~w())
     |> unique_constraint(:username)
     |> validate_length(:username, min: 1, max: 20)
-    |> validate_format(:username, ~r/^[a-z0-9_-]{3,20}$/, message: "must be at least 3 - 20 characters long and can contain only alpha-numeric characters, hyphens, and undercores")
+    |> validate_format(:username, ~r/^[A-za-z0-9_-]{3,20}$/, message: "must be at least 3 - 20 characters long and can contain only alpha-numeric characters, hyphens, and undercores")
     |> validate_format(:role, ~r/^[a-z0-9_-]+$/, message: "can contain only alpha-numeric characters, hyphens, and undercores")
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, message: "doesn't appear to be a vaild email address")

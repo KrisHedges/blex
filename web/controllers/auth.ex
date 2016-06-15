@@ -1,7 +1,6 @@
 defmodule KrishedgesSpace.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-  require IEx
 
   def login_by_username_and_pass(conn, user, given_pass) do
     if checkpw(given_pass, user.password_hash) do
@@ -20,5 +19,8 @@ defmodule KrishedgesSpace.Auth do
     end
   end
 
-end
+  def has_permission_from_claims(roles_list, claims) do
+    Enum.any?(roles_list, fn(role)-> Guardian.Permissions.from_claims(elem(claims,1), role) == 1 end)
+  end
 
+end
