@@ -9,14 +9,14 @@ defmodule KrishedgesSpace.PostController do
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } when not action in [:public_index, :show]
 
   def index(conn, _params, current_user, claims) do
-    posts = Repo.all(Post) |> Repo.preload(:categories)
+    posts = Repo.all(Post) |> Repo.preload([:categories, :user])
     render(conn, "index.json", posts: posts)
   end
 
 
   def public_index(conn, _params, current_user, claims) do
     query = from p in Post, where: p.published == true
-    posts = Repo.all(query) |> Repo.preload(:categories)
+    posts = Repo.all(query) |> Repo.preload([:categories, :user])
     render(conn, "index.json", posts: posts)
   end
 
@@ -42,8 +42,7 @@ defmodule KrishedgesSpace.PostController do
         end
 
         # Reload Post with it's categories
-        post = Repo.get!(Post, post.id) |> Repo.preload(:categories)
-
+        post = Repo.get!(Post, post.id) |> Repo.preload([:categories, :user])
         conn
         |> put_status(:created)
         |> render("show.json", post: post)
@@ -56,13 +55,13 @@ defmodule KrishedgesSpace.PostController do
 
 
   def show(conn, %{"id" => id}, current_user, claims) do
-    post = Repo.get!(Post, id) |> Repo.preload(:categories)
+    post = Repo.get!(Post, id) |> Repo.preload([:categories, :user])
     render(conn, "show.json", post: post)
   end
 
 
   def update(conn, %{"id" => id, "post" => post_params}, current_user, claims) do
-    post = Repo.get!(Post, id) |> Repo.preload(:categories)
+    post = Repo.get!(Post, id) |> Repo.preload([:categories])
 
     # Add an Edit record to post
     edit = %KrishedgesSpace.Edit{user_id: current_user.id}
@@ -96,7 +95,7 @@ defmodule KrishedgesSpace.PostController do
     # Finally Update our Post and refetch it with assosciations preloaded for the json view
     case Repo.update(changeset) do
       {:ok, post} ->
-        render(conn, "show.json", post: Repo.get(Post, post.id) |> Repo.preload(:categories))
+        render(conn, "show.json", post: Repo.get(Post, post.id) |> Repo.preload([:categories, :user]))
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
