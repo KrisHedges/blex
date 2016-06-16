@@ -18,7 +18,7 @@ export default Ember.Mixin.create({
   authorizationSetup: function(){
     this.controllerFor('Application').set('isAuthenticated', this.get('isAuthenticated'));
     this.controllerFor('Application').set('currentUser', this.get('currentUser'));
-    this.controllerFor('Application').set('authenticatedRole', this.get('authenticRole'));
+    this.controllerFor('Application').set('authenticatedRole', this.get('authenticatedRole'));
   },
 
   authorizationTeardown: function(){
